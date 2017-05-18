@@ -1,22 +1,25 @@
 package levelup.scvngr.architecturesample.ui.repo
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import levelup.scvngr.architecturesample.model.Repo
-import rx.Observable
-import java.util.concurrent.TimeUnit
+import levelup.scvngr.architecturesample.repository.GitHubRepository
 import javax.inject.Inject
 
-class RepoViewModel @Inject constructor(): ViewModel() {
-    val repos: LiveData<List<Repo>> = RepoLiveData()
-}
+class RepoViewModel @Inject constructor(val gitHubRepository: GitHubRepository) : ViewModel() {
+    private val userTrigger: MutableLiveData<String> = MutableLiveData()
+    val repos: LiveData<List<Repo>> = Transformations.switchMap(userTrigger) {
+        gitHubRepository.loadRepos(it)
+    }
+    var user: String = ""
+        set(value) {
+            field = value
+            userTrigger.value = value
+        }
 
-private class RepoLiveData: LiveData<List<Repo>>() {
-    init {
-        Observable.timer(3000,TimeUnit.MILLISECONDS)
-                .flatMap { Observable.just(1,2,3,4,5) }
-                .map { Repo("Repo $it") }
-                .toList()
-                .subscribe { postValue(it) }
+    fun refresh() {
+        userTrigger.value = user
     }
 }

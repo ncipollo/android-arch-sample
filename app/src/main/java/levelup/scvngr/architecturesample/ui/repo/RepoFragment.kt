@@ -19,14 +19,16 @@ class RepoFragment : LifecycleFragment() {
     val adapter = RepoAdapter()
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: RepoViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Injector.fragmentComponent.inject(this)
 
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
         viewModel.repos.observe(this, Observer {
             adapter.repos = it ?: emptyList()
+            refreshLayout.isRefreshing = false
         })
     }
 
@@ -40,6 +42,11 @@ class RepoFragment : LifecycleFragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-        refreshLayout.setOnRefreshListener { }
+        refreshLayout.setOnRefreshListener {
+            viewModel.refresh()
+        }
+        submitButton.setOnClickListener {
+            viewModel.user = userField.text.toString()
+        }
     }
 }
