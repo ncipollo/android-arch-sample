@@ -5,8 +5,9 @@ import android.arch.lifecycle.ViewModel
 import levelup.scvngr.architecturesample.model.Repo
 import rx.Observable
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class RepoViewModel: ViewModel() {
+class RepoViewModel @Inject constructor(): ViewModel() {
     val repos: LiveData<List<Repo>> = RepoLiveData()
 }
 

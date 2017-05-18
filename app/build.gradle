@@ -20,6 +20,10 @@ android {
         }
     }
 }
+// Necessary for Dagger code generation
+kapt {
+    generateStubs = true
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -32,8 +36,8 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
     // Dagger 2 Injection Library
-    compile 'com.google.dagger:dagger:2.2'
-    kapt 'com.google.dagger:dagger-compiler:2.2'
+    compile 'com.google.dagger:dagger:2.10'
+    kapt 'com.google.dagger:dagger-compiler:2.10'
     // Retrofit HTTP / Rest Library
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.google.code.gson:gson:2.6.2'

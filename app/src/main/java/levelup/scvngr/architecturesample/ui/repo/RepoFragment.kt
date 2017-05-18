@@ -10,14 +10,21 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_repo.*
 import levelup.scvngr.architecturesample.R
+import levelup.scvngr.architecturesample.injection.Injector
+import levelup.scvngr.architecturesample.viewmodel.ViewModelFactory
+import javax.inject.Inject
 
 
 class RepoFragment : LifecycleFragment() {
     val adapter = RepoAdapter()
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this).get(RepoViewModel::class.java)
+        Injector.fragmentComponent.inject(this)
+
+        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
         viewModel.repos.observe(this, Observer {
             adapter.repos = it ?: emptyList()
         })
