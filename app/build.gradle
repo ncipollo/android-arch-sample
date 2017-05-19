@@ -19,6 +19,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+        androidTest.java.srcDirs += "src/androidTest/kotlin"
+        androidTest.java.srcDirs += "src/test-common/kotlin"
+        test.java.srcDirs += "src/test/kotlin"
+        test.java.srcDirs += "src/test-common/kotlin"
+    }
 }
 // Necessary for Dagger code generation
 kapt {
@@ -27,20 +34,16 @@ kapt {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
-    testCompile 'junit:junit:4.12'
     // Dagger 2 Injection Library
     compile 'com.google.dagger:dagger:2.10'
     kapt 'com.google.dagger:dagger-compiler:2.10'
     // Retrofit HTTP / Rest Library
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     // RxJava
@@ -50,8 +53,22 @@ dependencies {
     // Architecture Components
     compile 'android.arch.lifecycle:runtime:1.0.0-alpha1'
     compile 'android.arch.lifecycle:extensions:1.0.0-alpha1'
-    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-alpha1'
 
+
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.10'
+    androidTestCompile 'org.mockito:mockito-core:2.8.9'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    kaptTest 'com.google.dagger:dagger-compiler:2.10'
+    testCompile 'junit:junit:4.12'
+    testCompile ("android.arch.core:core-testing:1.0.0-alpha1", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
+    testCompile 'org.mockito:mockito-core:2.8.9'
 }
 repositories {
     mavenCentral()
