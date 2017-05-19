@@ -22,7 +22,8 @@ class RepoViewModelTest {
     @JvmField @Rule
     val instantTask = InstantTaskExecutorRule()
 
-    @Before fun setUp() {
+    @Before
+    fun setUp() {
         githubApi = injectionRule.appComponent.githubApi
         viewModel = injectionRule.appComponent.repoViewModel
         `when`(githubApi.repos(ArgumentMatchers.anyString())).thenReturn(

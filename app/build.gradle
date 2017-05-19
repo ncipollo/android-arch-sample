@@ -52,13 +52,19 @@ dependencies {
     compile 'android.arch.lifecycle:runtime:1.0.0-alpha1'
     compile 'android.arch.lifecycle:extensions:1.0.0-alpha1'
 
-
+    //Android Tests
     kaptAndroidTest 'com.google.dagger:dagger-compiler:2.10'
     androidTestCompile 'org.mockito:mockito-core:2.8.9'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
+    androidTestCompile ("android.arch.core:core-testing:1.0.0-alpha1", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
+    androidTestCompile 'org.mockito:mockito-android:2.8.9'
+    // Unit Tests
     kaptTest 'com.google.dagger:dagger-compiler:2.10'
     testCompile 'junit:junit:4.12'
     testCompile ("android.arch.core:core-testing:1.0.0-alpha1", {
