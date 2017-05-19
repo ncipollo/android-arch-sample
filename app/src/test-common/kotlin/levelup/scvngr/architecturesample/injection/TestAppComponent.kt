@@ -1,6 +1,7 @@
 package levelup.scvngr.architecturesample.injection
 
 import dagger.Component
+import levelup.scvngr.architecturesample.api.GithubApi
 import levelup.scvngr.architecturesample.api.MockApiModule
 import levelup.scvngr.architecturesample.repository.GitHubRepository
 import levelup.scvngr.architecturesample.ui.repo.RepoViewModel
@@ -11,6 +12,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(MockApiModule::class, MockAppModule::class, ViewModelModule::class))
 interface TestAppComponent {
     val fragmentComponent: FragmentSubComponent
+    val githubApi: GithubApi
+    val githubRepository: GitHubRepository
     val repoViewModel: RepoViewModel
-    val githubRepo: GitHubRepository
 }

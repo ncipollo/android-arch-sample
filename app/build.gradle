@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 25
@@ -26,10 +27,7 @@ android {
         test.java.srcDirs += "src/test/kotlin"
         test.java.srcDirs += "src/test-common/kotlin"
     }
-}
-// Necessary for Dagger code generation
-kapt {
-    generateStubs = true
+
 }
 
 dependencies {
