@@ -8,7 +8,8 @@ import levelup.scvngr.architecturesample.model.Repo
 import levelup.scvngr.architecturesample.repository.GitHubRepository
 import javax.inject.Inject
 
-class RepoViewModel @Inject constructor(val gitHubRepository: GitHubRepository) : ViewModel() {
+class RepoViewModel @Inject constructor(private val gitHubRepository: GitHubRepository)
+    : ViewModel() {
     private val userTrigger: MutableLiveData<String> = MutableLiveData()
     val repos: LiveData<List<Repo>> = Transformations.switchMap(userTrigger) {
         gitHubRepository.loadRepos(it)
