@@ -33,46 +33,46 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:appcompat-v7:$app_compat_version"
+    compile "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    compile "com.android.support:design:$app_compat_version"
     // Dagger 2 Injection Library
-    compile 'com.google.dagger:dagger:2.10'
-    kapt 'com.google.dagger:dagger-compiler:2.10'
+    compile "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
     // Retrofit HTTP / Rest Library
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.google.code.gson:gson:$gson_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     // RxJava
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxkotlin:0.60.0'
+    compile "io.reactivex:rxjava:$rxjava_version"
+    compile "io.reactivex:rxandroid:$rxandroid_version"
+    compile "io.reactivex:rxkotlin:$rxkotlin_version"
     // Architecture Components
-    compile 'android.arch.lifecycle:runtime:1.0.0-alpha1'
-    compile 'android.arch.lifecycle:extensions:1.0.0-alpha1'
+    compile "android.arch.lifecycle:runtime:$arch_version"
+    compile "android.arch.lifecycle:extensions:$arch_version"
 
     //Android Tests
-    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.10'
-    androidTestCompile 'org.mockito:mockito-core:2.8.9'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    androidTestCompile "org.mockito:mockito-core:$mockito_version"
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile ("android.arch.core:core-testing:1.0.0-alpha1", {
+    androidTestCompile("android.arch.core:core-testing:$arch_version", {
         exclude group: 'com.android.support', module: 'support-compat'
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-core-utils'
     })
-    androidTestCompile 'org.mockito:mockito-android:2.8.9'
+    androidTestCompile "org.mockito:mockito-android:$mockito_version"
     // Unit Tests
-    kaptTest 'com.google.dagger:dagger-compiler:2.10'
-    testCompile 'junit:junit:4.12'
-    testCompile ("android.arch.core:core-testing:1.0.0-alpha1", {
+    kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
+    testCompile "junit:junit:$junit_version"
+    testCompile("android.arch.core:core-testing:$arch_version", {
         exclude group: 'com.android.support', module: 'support-compat'
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-core-utils'
     })
-    testCompile 'org.mockito:mockito-core:2.8.9'
+    testCompile "org.mockito:mockito-android:$mockito_version"
 }
 repositories {
     mavenCentral()
